@@ -15,7 +15,7 @@ Checked the quality of columns in the dataset to ensure appropriate data visuali
 
 ## Measures
 - Time Group Column Addition
-  '''
+  ```
   Time Group =
     SWITCH(
         TRUE(),
@@ -28,10 +28,10 @@ Checked the quality of columns in the dataset to ensure appropriate data visuali
         AND(MOD(HOUR('Crime Data'[Crime Time]), 24) > 18, MOD(HOUR('Crime Data'[Crime Time]), 24) <= 21), "6:00 PM - 8:59 PM",
         AND(MOD(HOUR('Crime Data'[Crime Time]), 24) > 21, MOD(HOUR('Crime Data'[Crime Time]), 24) <= 24), "9:00 PM - 11:59 PM"
     )
-  '''
+  ```
 - Date Table Addition
   DAX expression creates a more comprehensive date table with additional columns for "Year", "Month", and "MonthNum", “Weekday”, and “WeekNum” based on the range of dates in the crime data. 
-  '''
+  ```
   DateTable =
 VAR _Mindate = YEAR(MIN('Crime Data'[Crime Date]))
 VAR _Maxdate = YEAR(MAX('Crime Data'[Crime Date]))
@@ -47,13 +47,13 @@ ADDCOLUMNS(
     "Weekday", FORMAT([Date], "ddd"),
     "WeekNum", WEEKDAY([Date]),
 )
-  '''
+```
 Date Table Configuration
 Marked the generated table as a date table using the table tool, ensuring the format of dd/mm/yyyy in visualisations.
 
 - Label (Year)
 Calculates the year-over-year change in total crime count and provides a visual indicator (🔺 for increase, 🔻 for decrease) along with the absolute change.
-'''
+```
 Label (Year) =
 VAR _PrevYr =
     CALCULATE(
@@ -72,10 +72,10 @@ VAR _PrevYr =
      _YOYchange >=1, "🔺"  & _YOYchange,
      _YOYchange<1, "🔻" & _YOYchange
     )
-'''
+ ```
 - Label (Year)
   Calculates the month-over-month change in total crime count and provides a visual indicator (🔺 for increase, 🔻 for decrease) along with the absolute change.
-'''
+ ```
 Label(Month) =
     VAR _Pct_MoMChange =
     IF(
@@ -98,20 +98,20 @@ Label(Month) =
             _Pct_MoMChange >= _NegativePct, "▲" & FORMAT(_Pct_MoMChange, "0%"),
             _Pct_MoMChange < _NegativePct, "▼" & FORMAT(_Pct_MoMChange, "0%")
         )
-'''
+  ```
 - Blank Measure (Year)
   Provides a default value of 200 for cases where no data is available.
-'''
-Blank Measure(Year) = 200
-'''
+ ```
+ Blank Measure(Year) = 200
+ ```
 - Total Crime
   Counts the total number of rows in the crime data table, giving the total crime count.
-'''
+ ```
 Total Crime = COUNTROWS('Crime Data')
-'''
+ ```
 - Conditional Formatting for Year
   Applies conditional formatting to visualise the year-over-year change in total crime count. Grey indicates no change, green indicates an increase, and red indicates a decrease.
-'''
+  ```
 CF(Year) =
 VAR _PrevYr =
     CALCULATE(
@@ -123,8 +123,6 @@ VAR _PrevYr =
     [Total Crime] - _PrevYr,
     BLANK()
     )
-
-
         RETURN
     SWITCH(
     TRUE(),
@@ -132,10 +130,10 @@ VAR _PrevYr =
      _YOYchange >=1, "Green",
      _YOYchange<1, "Red"
     )
- '''
+  ```
 - Conditional Formatting for Month
   Applies conditional formatting to visualise the month-over-month change in total crime count. Grey indicates no change, green indicates an increase, and red indicates a decrease.
-'''
+  ```
  CF(Month) =
     VAR _Pct_MoMChange =
     IF(
@@ -158,10 +156,10 @@ VAR _PrevYr =
             _Pct_MoMChange >= _NegativePct, "Green",
             _Pct_MoMChange < _NegativePct, "Red"
         )
- '''
+  ```
 - Crime Unresolved
   Calculates the percentage of unsolved crimes by dividing the count of unresolved crimes by the total crime count.
- '''
+  ```
   Crime Unresolved =
     DIVIDE(
             CALCULATE(
@@ -170,10 +168,10 @@ VAR _PrevYr =
             ),
                 [Total Crime]
     )
-  '''
+  ```
 - Crime Resolved
   Calculates the percentage of resolved crimes by dividing the count of resolved crimes by the total crime count.
-  '''
+  ```
   Crime Resolved =
     DIVIDE(
             CALCULATE(
@@ -182,15 +180,16 @@ VAR _PrevYr =
             ),
                 [Total Crime]
     )
-
+  ```
 - Crime Previous Year
   Calculates the total crime count for the previous year to facilitate year-over-year comparison.
+  ```
   Crime prev. Year =
     CALCULATE(
         [Total Crime],
         SAMEPERIODLASTYEAR(DateTable[Date])
     )
-
+   ```
 ## Data Modeling
 Established a connection between the crime date column of the crime data table and the date part of the date table and checked if all the tables are connected together.
 
