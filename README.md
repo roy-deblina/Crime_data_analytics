@@ -233,5 +233,5 @@ Added a slicer to enable viewing all visuals for every crime from crime types.
 - Nighttime Attention: Increase patrols and surveillance from 12:00 AM to 2:59 AM, the peak crime hours.
 - Weekday Resources: Allocate resources strategically on weekdays when crime rates are consistently high.
 - Targeted Approaches: Prioritize prevention and intervention efforts for violence and sexual harassment, the most prevalent crime types.
-Crime Project
+
 
