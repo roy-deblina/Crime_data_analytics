@@ -15,7 +15,7 @@ Checked the quality of columns in the dataset to ensure appropriate data visuali
 
 ## Measures
 - Time Group Column Addition
-  ```
+```
   Time Group =
     SWITCH(
         TRUE(),
@@ -28,10 +28,10 @@ Checked the quality of columns in the dataset to ensure appropriate data visuali
         AND(MOD(HOUR('Crime Data'[Crime Time]), 24) > 18, MOD(HOUR('Crime Data'[Crime Time]), 24) <= 21), "6:00 PM - 8:59 PM",
         AND(MOD(HOUR('Crime Data'[Crime Time]), 24) > 21, MOD(HOUR('Crime Data'[Crime Time]), 24) <= 24), "9:00 PM - 11:59 PM"
     )
-  ```
+ ```
 - Date Table Addition
   DAX expression creates a more comprehensive date table with additional columns for "Year", "Month", and "MonthNum", “Weekday”, and “WeekNum” based on the range of dates in the crime data. 
-  ```
+ ```
   DateTable =
 VAR _Mindate = YEAR(MIN('Crime Data'[Crime Date]))
 VAR _Maxdate = YEAR(MAX('Crime Data'[Crime Date]))
