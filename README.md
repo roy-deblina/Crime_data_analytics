@@ -1,4 +1,4 @@
-# Crime_data_analytics
+# crime-data-analytics
 
 ## Introduction
 The Crime Data Analysis Project aims to utilize data-driven insights to understand and address criminal activities more effectively. By analyzing two primary datasets - the Crime Data table and the Person Involvement table - we seek to identify patterns, explore demographic factors, develop predictive models, and assess law enforcement efforts. Through this project, we aim to contribute to evidence-based crime prevention and enhance public safety measures.
