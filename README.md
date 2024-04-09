@@ -112,30 +112,28 @@ Total Crime = COUNTROWS('Crime Data')
 
 - Conditional Formatting for Year
   Applies conditional formatting to visualise the year-over-year change in total crime count. Grey indicates no change, green indicates an increase, and red indicates a decrease.
-  ```
-CF(Year) =
-VAR _PrevYr =
-    CALCULATE(
-        [Total Crime],
-        SAMEPERIODLASTYEAR(DateTable[Date])
-    )
-    VAR _YOYchange =
-    IF (_PrevYr<> BLANK(),
-    [Total Crime] - _PrevYr,
-    BLANK()
-    )
-        RETURN
-    SWITCH(
-    TRUE(),
-     _YOYchange =0,  "Grey",
-     _YOYchange >=1, "Green",
-     _YOYchange<1, "Red"
-    )
+  ```CF(Year) =
+    VAR _PrevYr =
+        CALCULATE(
+            [Total Crime],
+            SAMEPERIODLASTYEAR(DateTable[Date])
+        )
+        VAR _YOYchange =
+        IF (_PrevYr<> BLANK(),
+        [Total Crime] - _PrevYr,
+        BLANK()
+        )
+            RETURN
+        SWITCH(
+        TRUE(),
+         _YOYchange =0,  "Grey",
+         _YOYchange >=1, "Green",
+         _YOYchange<1, "Red"
+        )
   ```
 - Conditional Formatting for Month
   Applies conditional formatting to visualise the month-over-month change in total crime count. Grey indicates no change, green indicates an increase, and red indicates a decrease.
-  ```
- CF(Month) =
+  ```CF(Month) =
     VAR _Pct_MoMChange =
     IF(
         DIVIDE(
@@ -161,35 +159,35 @@ VAR _PrevYr =
 - Crime Unresolved
   Calculates the percentage of unsolved crimes by dividing the count of unresolved crimes by the total crime count.
   ```
-  Crime Unresolved =
-    DIVIDE(
-            CALCULATE(
-                [Total Crime],
-                'Crime Data'[Resolved] = 0
-            ),
-                [Total Crime]
-    )
+    Crime Unresolved =
+      DIVIDE(
+              CALCULATE(
+                  [Total Crime],
+                  'Crime Data'[Resolved] = 0
+              ),
+                  [Total Crime]
+      )
   ```
 - Crime Resolved
   Calculates the percentage of resolved crimes by dividing the count of resolved crimes by the total crime count.
   ```
-  Crime Resolved =
-    DIVIDE(
-            CALCULATE(
-                [Total Crime],
-                'Crime Data'[Resolved] = 1
-            ),
-                [Total Crime]
-    )
+    Crime Resolved =
+      DIVIDE(
+              CALCULATE(
+                  [Total Crime],
+                  'Crime Data'[Resolved] = 1
+              ),
+                  [Total Crime]
+      )
   ```
 - Crime Previous Year
   Calculates the total crime count for the previous year to facilitate year-over-year comparison.
   ```
-  Crime prev. Year =
-    CALCULATE(
-        [Total Crime],
-        SAMEPERIODLASTYEAR(DateTable[Date])
-    )
+    Crime prev. Year =
+      CALCULATE(
+          [Total Crime],
+          SAMEPERIODLASTYEAR(DateTable[Date])
+      )
    ```
 
 ## Data Modeling
