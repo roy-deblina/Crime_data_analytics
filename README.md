@@ -236,7 +236,7 @@ Added a slicer to enable viewing all visuals for every crime from crime types.
 This GIF demonstrates how different crime types vary over time, providing insights into the dynamics of criminal activities.
 
 ### Total Crime Variation Over Time
-![drill_page png](https://github.com/roy-deblina/Crime_data_analytics/assets/164593876/97371d3a-9af4-4496-92e4-e5840d29411b)
+![drill_page png(https://github.com/roy-deblina/Crime_data_analytics/assets/164593876/97371d3a-9af4-4496-92e4-e5840d29411b)
 
 This illustrates the change in total crime occurrences over different times of the day, enabling a deeper understanding of crime patterns and trends.
 
