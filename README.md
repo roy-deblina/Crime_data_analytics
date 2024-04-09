@@ -33,20 +33,20 @@ Checked the quality of columns in the dataset to ensure appropriate data visuali
   DAX expression creates a more comprehensive date table with additional columns for "Year", "Month", and "MonthNum", “Weekday”, and “WeekNum” based on the range of dates in the crime data. 
  ```
   DateTable =
-VAR _Mindate = YEAR(MIN('Crime Data'[Crime Date]))
-VAR _Maxdate = YEAR(MAX('Crime Data'[Crime Date]))
-RETURN
-ADDCOLUMNS(
-    FILTER(
-        CALENDARAUTO(),
-        YEAR([Date]) >= _Mindate && YEAR([Date]) <= _Maxdate
-    ),
-    "Year", YEAR([Date]),
-    "Month", FORMAT([Date], "mmm"),
-    "MonthNum", MONTH([Date]),
-    "Weekday", FORMAT([Date], "ddd"),
-    "WeekNum", WEEKDAY([Date]),
-)
+    VAR _Mindate = YEAR(MIN('Crime Data'[Crime Date]))
+    VAR _Maxdate = YEAR(MAX('Crime Data'[Crime Date]))
+    RETURN
+    ADDCOLUMNS(
+        FILTER(
+            CALENDARAUTO(),
+            YEAR([Date]) >= _Mindate && YEAR([Date]) <= _Maxdate
+        ),
+        "Year", YEAR([Date]),
+        "Month", FORMAT([Date], "mmm"),
+        "MonthNum", MONTH([Date]),
+        "Weekday", FORMAT([Date], "ddd"),
+        "WeekNum", WEEKDAY([Date]),
+    )
 ```
 Date Table Configuration
 Marked the generated table as a date table using the table tool, ensuring the format of dd/mm/yyyy in visualisations.
@@ -54,60 +54,59 @@ Marked the generated table as a date table using the table tool, ensuring the fo
 - Label (Year)
 Calculates the year-over-year change in total crime count and provides a visual indicator (🔺 for increase, 🔻 for decrease) along with the absolute change.
 ```
-Label (Year) =
-VAR _PrevYr =
-    CALCULATE(
-        [Total Crime],
-        SAMEPERIODLASTYEAR(DateTable[Date])
-    )
-    VAR _YOYchange =
-    IF (_PrevYr<> BLANK(),
-    [Total Crime] - _PrevYr,
-    BLANK()
-    )
-        RETURN
-    SWITCH(
-    TRUE(),
-     _YOYchange =0,  _YOYchange & "-",
-     _YOYchange >=1, "🔺"  & _YOYchange,
-     _YOYchange<1, "🔻" & _YOYchange
-    )
+  Label (Year) =
+  VAR _PrevYr =
+      CALCULATE(
+          [Total Crime],
+          SAMEPERIODLASTYEAR(DateTable[Date])
+      )
+      VAR _YOYchange =
+      IF (_PrevYr<> BLANK(),
+      [Total Crime] - _PrevYr,
+      BLANK()
+      )
+          RETURN
+      SWITCH(
+      TRUE(),
+       _YOYchange =0,  _YOYchange & "-",
+       _YOYchange >=1, "🔺"  & _YOYchange,
+       _YOYchange<1, "🔻" & _YOYchange
+      )
  ```
 - Label (Year)
   Calculates the month-over-month change in total crime count and provides a visual indicator (🔺 for increase, 🔻 for decrease) along with the absolute change.
- ```
-Label(Month) =
-    VAR _Pct_MoMChange =
-    IF(
-        DIVIDE(
-            [Total Crime] - [Crime prevMonth],
-            [Crime prevMonth]
-        )
-        <>BLANK(),
-        DIVIDE(
-            [Total Crime] - [Crime prevMonth],
-            [Crime prevMonth]
-        ),
-        BLANK()
-    )
-    VAR _NegativePct = -0.01
-    RETURN
-        SWITCH(
-            TRUE(),
-            _Pct_MoMChange = 0, _Pct_MoMChange& "_",
-            _Pct_MoMChange >= _NegativePct, "▲" & FORMAT(_Pct_MoMChange, "0%"),
-            _Pct_MoMChange < _NegativePct, "▼" & FORMAT(_Pct_MoMChange, "0%")
-        )
+  ```Label(Month) =
+      VAR _Pct_MoMChange =
+      IF(
+          DIVIDE(
+              [Total Crime] - [Crime prevMonth],
+              [Crime prevMonth]
+          )
+          <>BLANK(),
+          DIVIDE(
+              [Total Crime] - [Crime prevMonth],
+              [Crime prevMonth]
+          ),
+          BLANK()
+      )
+      VAR _NegativePct = -0.01
+      RETURN
+          SWITCH(
+              TRUE(),
+              _Pct_MoMChange = 0, _Pct_MoMChange& "_",
+              _Pct_MoMChange >= _NegativePct, "▲" & FORMAT(_Pct_MoMChange, "0%"),
+              _Pct_MoMChange < _NegativePct, "▼" & FORMAT(_Pct_MoMChange, "0%")
+          )
   ```
 - Blank Measure (Year)
   Provides a default value of 200 for cases where no data is available.
  ```
- Blank Measure(Year) = 200
+   Blank Measure(Year) = 200
  ```
 - Total Crime
   Counts the total number of rows in the crime data table, giving the total crime count.
  ```
-Total Crime = COUNTROWS('Crime Data')
+  Total Crime = COUNTROWS('Crime Data')
  ```
 
 - Conditional Formatting for Year
@@ -237,8 +236,7 @@ Added a slicer to enable viewing all visuals for every crime from crime types.
 This GIF demonstrates how different crime types vary over time, providing insights into the dynamics of criminal activities.
 
 ### Total Crime Variation Over Time
-![Total Crime Variation](![drill_page](https://github.com/roy-deblina/Crime_data_analytics/assets/164593876/e8c99ee1-ed5a-45d4-b0a4-15245021a18e)
-)
+![drill_page png](https://github.com/roy-deblina/Crime_data_analytics/assets/164593876/97371d3a-9af4-4496-92e4-e5840d29411b)
 
 These illustrates the change in total crime occurrences over different times of the day, enabling a deeper understanding of crime patterns and trends.
 
