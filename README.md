@@ -109,9 +109,9 @@ Label(Month) =
  ```
 Total Crime = COUNTROWS('Crime Data')
  ```
+
 - Conditional Formatting for Year
   Applies conditional formatting to visualise the year-over-year change in total crime count. Grey indicates no change, green indicates an increase, and red indicates a decrease.
-
   ```
 CF(Year) =
 VAR _PrevYr =
@@ -191,6 +191,7 @@ VAR _PrevYr =
         SAMEPERIODLASTYEAR(DateTable[Date])
     )
    ```
+
 ## Data Modeling
 Established a connection between the crime date column of the crime data table and the date part of the date table and checked if all the tables are connected together.
 
@@ -252,5 +253,3 @@ Based on general visual,
 - Nighttime Attention: Increase patrols and surveillance from 12:00 AM to 2:59 AM, the peak crime hours.
 - Weekday Resources: Allocate resources strategically on weekdays when crime rates are consistently high.
 - Targeted Approaches: Prioritize prevention and intervention efforts for violence and sexual harassment, the most prevalent crime types.
-
-
