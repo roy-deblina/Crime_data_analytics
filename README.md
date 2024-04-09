@@ -111,6 +111,7 @@ Total Crime = COUNTROWS('Crime Data')
  ```
 - Conditional Formatting for Year
   Applies conditional formatting to visualise the year-over-year change in total crime count. Grey indicates no change, green indicates an increase, and red indicates a decrease.
+
   ```
 CF(Year) =
 VAR _PrevYr =
