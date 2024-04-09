@@ -210,13 +210,16 @@ Generated a map visualization to comprehend the crime rate on a country level.
 Added a table to display the month part of the date table.
 
 ### Clustered Column Chart
-Added a clustered column chart to exhibit the year-wise total crime.
+Added a clustered column chart to exhibit the year-wise total crime and another one in other page to show crime type wise total crime (where Time-group and weekday added in drill through).
 
 ### Clustered Bar Chart
 Added a clustered bar chart to exhibit the Time Group-wise total crime.
 
 ### Line Chart
-Added line charts to exhibit different Time-wise and Month-wise total crime.
+Added line charts to exhibit different Time-wise total crime.
+
+### Area Chart
+Added line charts to exhibit different Time-wise and Month-wise total crime, and in drill through time-group and weekday added.
 
 ### Matrix (HeatMap)
 Visualized Month, Weekday, and Total Crime fields in the matrix. Adjusted cell formatting to represent values with different background and font colors.
@@ -227,7 +230,22 @@ Created a column chart to depict total crime versus each month.
 ### Slicer
 Added a slicer to enable viewing all visuals for every crime from crime types.
 
+### Crime Data Variation GIF
+![Crime Data Variation](![crime-visual gif](https://github.com/roy-deblina/Crime_data_analytics/assets/164593876/8da44321-ea46-4c31-8386-8c7b5932ec2a)
+)
+
+This GIF demonstrates how different crime types vary over time, providing insights into the dynamics of criminal activities.
+
+### Total Crime Variation Over Time
+![Total Crime Variation](![drill_page](https://github.com/roy-deblina/Crime_data_analytics/assets/164593876/e8c99ee1-ed5a-45d4-b0a4-15245021a18e)
+)
+
+These illustrates the change in total crime occurrences over different times of the day, enabling a deeper understanding of crime patterns and trends.
+
 ## Conclusion
+
+This README provides an overview of the Crime Project, including its objectives and the visualizations it encompasses. For further details, refer to the project documentation and codebase.
+Based on general visual,
 - Priority on Austria: Focus efforts on Austria, where the highest number of crimes occur.
 - Seasonal Vigilance: Be prepared for crime spikes in October and September with targeted interventions.
 - Nighttime Attention: Increase patrols and surveillance from 12:00 AM to 2:59 AM, the peak crime hours.
